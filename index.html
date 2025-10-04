@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Matthew's Portfolio</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(135deg, #f0f4f8, #d9e4f5);
+  color: #222;
+  text-align: center;
+}
+
+header {
+  padding: 15px 10px;
+  background: rgba(255,255,255,0.95);
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 1.3rem;
+}
+
+.login-btn {
+  background: #4CAF50;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: 0.3s;
+}
+
+.login-btn:hover { background: #3e8e41; }
+
+.section-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin: 15px 0;
+}
+
+.section-buttons button {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 5px 8px;
+  border-radius: 6px;
+  border: none;
+  background: #66a6ff;
+  color: white;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.section-buttons button:hover {
+  background: #4d8ddb;
+  transform: scale(1.05);
+}
+
+.info-section {
+  display: none;
+  opacity: 0;
+  transform: translateY(10px);
+  background: rgba(255,255,255,0.95);
+  padding: 10px 12px;
+  border-radius: 10px;
+  max-width: 320px;
+  margin: 10px auto;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+  transition: all 0.5s ease;
+  text-align: left;
+  font-size: 0.8rem;
+}
+
+.info-section.show {
+  display: block;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.info-section h3 {
+  margin-top: 0;
+  font-size: 1rem;
+  text-align: center;
+}
+
+.info-section img {
+  width: 100%;
+  max-height: 150px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 5px;
+}
+
+/* PS Games Grid */
+.ps-grid {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.ps-grid img {
+  width: 100px;
+  height: 140px;
+  object-fit: cover;
+  border-radius: 8px;
+  transition: transform 0.3s ease, opacity 0.5s ease;
+  opacity: 0;
+}
+
+.ps-grid img.show {
+  opacity: 1;
+}
+
+.ps-grid img:hover {
+  transform: scale(1.1);
+}
+
+#loginModal {
+  display: none;
+  position: fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background: rgba(0,0,0,0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-container {
+  background: #fff;
+  padding: 14px 15px;
+  border-radius: 10px;
+  width: 240px;
+  text-align: center;
+  font-size: 0.85rem;
+  transform: scale(0.8);
+  opacity: 0;
+  transition: all 0.4s ease;
+}
+
+.login-container.show {
+  transform: scale(1);
+  opacity: 1;
+}
+
+.login-container input {
+  width: 100%;
+  padding: 6px 8px;
+  margin: 4px 0;
+  font-size: 0.8rem;
+}
+
+.captcha-container {
+  margin: 8px 0;
+}
+
+.login-container button {
+  width: 100%;
+  padding: 6px;
+  font-size: 0.85rem;
+  background: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.login-container button:hover {
+  background: #3e8e41;
+}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Matthew's Portfolio</h1>
+  <button class="login-btn" onclick="openLogin()">Login</button>
+</header>
+
+<div class="section-buttons">
+  <button onclick="showSection('aboutMe')">All About Me</button>
+  <button onclick="showSection('skills')">Skills</button>
+  <button onclick="showSection('created')">What I've Created</button>
+  <button onclick="showSection('phone')">My Phone</button>
+  <button onclick="showSection('favorites')">Favorites</button>
+  <button onclick="showSection('psGames')">PS Games</button>
+</div>
+
+<!-- Sections -->
+<div id="aboutMe" class="info-section">
+  <h3>All About Me</h3>
+  <ul>
+    <li><strong>Name:</strong> Matthew</li>
+    <li><strong>Age:</strong> 10</li>
+    <li><strong>Gender:</strong> Male</li>
+    <li><strong>Device I use ChatGPT:</strong> Android Tablet</li>
+  </ul>
+</div>
+
+<div id="skills" class="info-section">
+  <h3>Skills</h3>
+  <p>I’m great at thinking up fun ideas, solving problems, and exploring tech. I like debugging and improving projects I work on!</p>
+</div>
+
+<div id="created" class="info-section">
+  <h3>What I've Created</h3>
+  <img src="https://images.unsplash.com/photo-1611078480243-792f472f270c?crop=entropy&cs=tinysrgb&fit=max&h=150&w=320" alt="My creation">
+  <p>Built fun web projects, interactive websites, and mini-games for learning and experimentation.</p>
+</div>
+
+<div id="phone" class="info-section">
+  <h3>My Phone</h3>
+  <img src="https://media.gettyimages.com/id/1240553005/photo/sony-products-ahead-of-earnings-announcement.webp?s=612x612&w=gi&k=20&c=4VXb-8mmHE2IsLQre2HCCFxNNa5o7NUtFjb5_SBZ0rU=" alt="Sony Xperia III">
+  <p>Sony Xperia III — fast, sleek, and perfect for browsing and taking photos.</p>
+</div>
+
+<div id="favorites" class="info-section">
+  <h3>Favorites</h3>
+  <ul>
+    <li>Pizza 🍕</li>
+    <li>Mac & Cheese 🧀</li>
+    <li>Bread 🍞</li>
+  </ul>
+</div>
+
+<div id="psGames" class="info-section">
+  <h3>My Favorite PlayStation Games</h3>
+  <ul>
+    <li>Teardown</li>
+    <li>Train Sim World 5</li>
+    <li>Gran Turismo</li>
+  </ul>
+  <div class="ps-grid">
+    <img src="https://upload.wikimedia.org/wikipedia/en/3/3f/Teardown_cover_art.png" alt="Teardown">
+    <img src="https://upload.wikimedia.org/wikipedia/en/7/7a/Train_Sim_World_5_cover.jpg" alt="Train Sim World 5">
+    <img src="https://upload.wikimedia.org/wikipedia/en/7/7d/Gran_Turismo_7_cover_art.jpg" alt="Gran Turismo">
+  </div>
+</div>
+
+<!-- Login Modal -->
+<div id="loginModal">
+  <div class="login-container" id="loginBox">
+    <h3>Login</h3>
+    <input type="text" placeholder="Username">
+    <input type="password" placeholder="Password">
+    <div class="captcha-container">
+      <iframe src="https://embed.neal.fun/not-a-robot/1" width="200" height="280" frameborder="0" scrolling="no"></iframe>
+    </div>
+    <button>Login</button>
+  </div>
+</div>
+
+<script>
+function openLogin(){
+  const modal = document.getElementById('loginModal');
+  const loginBox = document.getElementById('loginBox');
+  modal.style.display = 'flex';
+  setTimeout(()=> loginBox.classList.add('show'), 50);
+}
+
+window.onclick = function(e){
+  const modal = document.getElementById('loginModal');
+  const loginBox = document.getElementById('loginBox');
+  if(e.target == modal){
+    loginBox.classList.remove('show');
+    setTimeout(()=> modal.style.display='none',300);
+  }
+}
+
+function showSection(id){
+  document.querySelectorAll('.info-section').forEach(s=>{
+    s.classList.remove('show');
+  });
+  const target = document.getElementById(id);
+  target.classList.add('show');
+  target.scrollIntoView({behavior:'smooth'});
+
+  // Animate PS game images
+  if(id === 'psGames'){
+    document.querySelectorAll('.ps-grid img').forEach((img,i)=>{
+      img.classList.remove('show');
+      setTimeout(()=> img.classList.add('show'), i*150);
+    });
+  }
+}
+</script>
+
+</body>
+</html>
