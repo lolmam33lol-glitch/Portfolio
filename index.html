@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Matthew's Portfolio</title>
+<style>
+  body{
+    font-family:"Poppins",sans-serif;
+    background:linear-gradient(135deg,#1e1e2f,#3a3a5a);
+    color:white;
+    margin:0;
+    padding:20px;
+  }
+  button{
+    background:#ffb703;
+    color:#1e1e2f;
+    padding:10px 20px;
+    border:none;
+    border-radius:12px;
+    cursor:pointer;
+    font-weight:bold;
+    transition:.3s;
+    margin-right:10px;
+  }
+  button:hover{
+    background:#ffd166;
+    transform:scale(1.05);
+  }
+  .fancy{text-align:center;}
+  section{margin:40px 0;}
+  .card{
+    background:rgba(255,255,255,.1);
+    border-radius:15px;
+    padding:15px;
+    margin:10px auto;
+    max-width:400px;
+    transition:.3s;
+  }
+  .card:hover{transform:translateY(-5px);}
+  .hidden{display:none;}
+  #portfolioText{
+    background:#fff;
+    color:#1e1e2f;
+    padding:30px;
+    border-radius:15px;
+    box-shadow:0 0 20px rgba(0,0,0,.3);
+    max-width:700px;
+    margin:30px auto;
+    line-height:1.6;
+  }
+  #adminPanel{
+    position:fixed;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    background:#fff;
+    color:#111;
+    padding:30px;
+    border-radius:15px;
+    box-shadow:0 0 25px rgba(0,0,0,.5);
+    width:90%;
+    max-width:600px;
+    z-index:999;
+  }
+  #adminPanel ul{
+    background:#eee;
+    padding:10px;
+    border-radius:8px;
+    list-style:none;
+  }
+  #adminPanel h3{margin-top:15px;}
+</style>
+</head>
+<body>
+  <button id="toggleView">Switch View</button>
+  <button id="adminBtn">Admin</button>
+
+  <div id="portfolio" class="fancy">
+    <section class="hero">
+      <h1>Matthew</h1>
+      <p>Code Maker | Web Developer | Game Builder</p>
+    </section>
+
+    <section class="projects">
+      <h2>Projects</h2>
+      <div class="card">
+        <h3>Crumpet OS</h3>
+        <p>A full web OS with a BIOS, boot animation, and OOBE setup.</p>
+      </div>
+      <div class="card">
+        <h3>Egg Landing Game</h3>
+        <p>Physics-based game where you guide an egg to a plate.</p>
+      </div>
+      <div class="card">
+        <h3>Virtual Android</h3>
+        <p>Simulated Android experience with fake calls and messages.</p>
+      </div>
+    </section>
+
+    <section class="contact">
+      <h2>Contact</h2>
+      <p>Hit me up on GitHub or wherever good code lives.</p>
+    </section>
+  </div>
+
+  <div id="portfolioText" class="hidden">
+    <h1>Matthew's Portfolio</h1>
+    <p>Hi, I'm Matthew, a web developer and code maker. I build everything from web operating systems to mobile game clones.  
+    Some of my projects include Crumpet OS, a full web OS; Egg Landing Game, a physics puzzle; and Virtual Android, a simulated Android system.</p>
+    <p>Contact me if you want clean code, creative vibes, and no nonsense.</p>
+  </div>
+
+  <div id="adminPanel" class="hidden">
+    <h2>Admin Panel</h2>
+    <h3>Logged User Agents:</h3>
+    <ul id="userList"></ul>
+    <h3>Matthew’s Devices:</h3>
+    <ul>
+      <li>Nintendo Switch</li>
+      <li>Echo Show 8</li>
+      <li>Sony Xperia</li>
+      <li>Samsung Galaxy Tab A9</li>
+    </ul>
+    <button id="closeAdmin">Close</button>
+  </div>
+
+<script>
+const toggle=document.getElementById('toggleView');
+const fancy=document.getElementById('portfolio');
+const text=document.getElementById('portfolioText');
+const adminBtn=document.getElementById('adminBtn');
+const adminPanel=document.getElementById('adminPanel');
+const closeAdmin=document.getElementById('closeAdmin');
+const userList=document.getElementById('userList');
+
+let fancyMode=true;
+let userAgents=JSON.parse(localStorage.getItem('userAgents')||'[]');
+const myAgent=navigator.userAgent;
+if(!userAgents.includes(myAgent)){
+  userAgents.push(myAgent);
+  localStorage.setItem('userAgents',JSON.stringify(userAgents));
+}
+
+toggle.addEventListener('click',()=>{
+  fancyMode=!fancyMode;
+  if(fancyMode){
+    fancy.classList.remove('hidden');
+    text.classList.add('hidden');
+    toggle.textContent="Switch View";
+  }else{
+    fancy.classList.add('hidden');
+    text.classList.remove('hidden');
+    toggle.textContent="Back to Fancy View";
+  }
+});
+
+adminBtn.addEventListener('click',()=>{
+  const code=prompt("Enter admin code:");
+  if(code==="2001"){
+    adminPanel.classList.remove('hidden');
+    userList.innerHTML='';
+    userAgents.forEach(agent=>{
+      const li=document.createElement('li');
+      li.textContent=agent;
+      userList.appendChild(li);
+    });
+  }else{
+    alert("Access denied. Wrong code.");
+  }
+});
+
+closeAdmin.addEventListener('click',()=>{
+  adminPanel.classList.add('hidden');
+});
+</script>
+</body>
+</html>
